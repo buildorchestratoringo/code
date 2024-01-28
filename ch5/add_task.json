@@ -1,0 +1,11 @@
+{
+    "ID": "6be4cb6b-61d1-40cb-bc7b-9cacefefa60c",
+    "State": 2,
+    "Task": {
+        "State": 1,
+        "ID": "21b23589-5d2d-4731-b5c9-a97e9832d021", 
+        "Name": "test-chapter-5", 
+        "Image": "strm/helloworld-http",
+        "Cpu": 1.0
+    }
+}
