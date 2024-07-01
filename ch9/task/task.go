@@ -31,6 +31,9 @@ type Task struct {
 	RestartPolicy string
 	StartTime     time.Time
 	FinishTime    time.Time
+	HostPorts     nat.PortMap
+	HealthCheck   string
+	RestartCount  int
 }
 
 type TaskEvent struct {
@@ -66,6 +69,11 @@ type Config struct {
 	Env []string
 	// RestartPolicy for the container ["", "always", "unless-stopped", "on-failure"]
 	RestartPolicy string
+}
+
+type DockerInspectResponse struct {
+	Error     error
+	Container *types.ContainerJSON
 }
 
 func NewConfig(t *Task) *Config {
@@ -167,6 +175,32 @@ func (d *Docker) Stop(id string) DockerResult {
 	})
 	if err != nil {
 		log.Printf("Error removing container %s: %v\n", id, err)
+		return DockerResult{Error: err}
+	}
+
+	return DockerResult{Action: "stop", Result: "success", Error: nil}
+}
+
+func (d *Docker) Inspect(containerID string) DockerInspectResponse {
+	dc, _ := client.NewClientWithOpts(client.FromEnv)
+	ctx := context.Background()
+	resp, err := dc.ContainerInspect(ctx, containerID)
+	if err != nil {
+		log.Printf("Error inspecting container: %s\n", err)
+		return DockerInspectResponse{Error: err}
+	}
+
+	return DockerInspectResponse{Container: &resp}
+}
+
+// FIXME:
+func (d *Docker) Remove(containerID string) DockerResult {
+	dc, _ := client.NewClientWithOpts(client.FromEnv)
+	ctx := context.Background()
+	// resp
+	_, err := dc.ContainerInspect(ctx, containerID)
+	if err != nil {
+		log.Printf("Error inspecting container: %s\n", err)
 		return DockerResult{Error: err}
 	}
 

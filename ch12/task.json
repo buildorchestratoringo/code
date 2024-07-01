@@ -3,8 +3,8 @@
     "State": 2,
     "Task": {
         "State": 1,
-        "ID": "21b23589-5d2d-4731-b5c9-a97e9832d021", 
-        "Name": "test-chapter-8", 
+        "ID": "21b23589-5d2d-4731-b5c9-a97e9832d021",
+        "Name": "test-chapter-12a",
         "Image": "strm/helloworld-http"
     }
 }

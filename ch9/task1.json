@@ -1,0 +1,17 @@
+{
+    "ID": "a7aa1d44-08f6-443e-9378-f5884311019e",
+    "State": 2,
+    "Task": {
+        "State": 1,
+        "ID": "bb1d59ef-9fc1-4e4b-a44d-db571eeed203",
+        "Name": "test-chapter-9.1",
+        "Image": "timboring/echo-server:latest",
+        "ExposedPorts": {
+            "7777/tcp": {}
+        },
+        "PortBindings": {
+            "7777/tcp": "7777"
+        },
+        "HealthCheck": "/health"
+    }
+}
